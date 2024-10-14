@@ -1,12 +1,12 @@
 {% load static %}
-
+{% load current_time %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forum Posts</title>
-    
+
     {% block styles %}
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     {% endblock %}
@@ -16,6 +16,7 @@
 </head>
 <body>
     {% include 'common/nav.html' %}
+    <p>Last refresh: {% current_time %}</p>
     {% block content %}
     {% endblock %}
 </body>
