@@ -1,6 +1,4 @@
 {% extends 'common/base.html' %}
-{% load static %}
-{% load markdown_extras %}
 
 {% block styles %}
     {{ block.super }}
@@ -17,6 +15,5 @@
         {{ form }}
         {% csrf_token %}
         <button class="button-9">Submit</button>
-    </form>>
+    </form>
 {% endblock %}
-

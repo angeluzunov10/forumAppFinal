@@ -29,18 +29,19 @@
             <div class="col-md-8 py-4">
             <div class="text-center">
                 {% block content %}
+                    Hello World
                 {% endblock %}
             </div>
             </div>
             <div class="col-md-2 p-3 d-flex justify-content-end">
                 <div>
-                    {% user_info %}
+                    {% user_info request.user %}
                 </div>
             </div>
         </div>
     </div>
-    
-    
+
+
 </body>
     <script src='https://unpkg.com/akar-icons-fonts'></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
