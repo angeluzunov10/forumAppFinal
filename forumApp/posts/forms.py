@@ -1,8 +1,9 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.forms import formset_factory
 
 from forumApp.posts.mixins import DisableFieldsMixin
-from forumApp.posts.models import Post
+from forumApp.posts.models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
@@ -34,6 +35,18 @@ class PostForm(forms.ModelForm):
         if title and content and title in content:
             raise ValidationError('The post title cannot be included in the post content!')
 
+        return cleaned_data
+
+    def save(self, commit=True):
+        post = super().save(commit=False)
+
+        post.title = post.title.capitalize()
+
+        if commit:
+            post.save()
+
+        return post
+
 
 class PostCreateForm(PostForm):
     pass
@@ -58,3 +71,39 @@ class SearchForm(forms.Form):
             }
         )
     )
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('author', 'content')
+
+        labels = {
+            'author': '',
+            'content': '',
+        }
+
+        error_messages = {
+            'author': {
+                'required': 'Author name is required!',
+            },
+            'content': {
+                'required': 'Content is required!',
+            }
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['author'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Your name',
+        })
+
+        self.fields['content'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Add message...',
+        })
+
+
+CommentFormSet = formset_factory(CommentForm, extra=1)
