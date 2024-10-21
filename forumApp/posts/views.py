@@ -1,16 +1,15 @@
 from datetime import datetime
 
-from django.core.paginator import Paginator
 from django.forms import modelform_factory
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views import View
 from django.views.generic import TemplateView, RedirectView, ListView, FormView, CreateView, DeleteView, UpdateView, \
     DetailView
 
-from decorators import measure_execution_time
-from forumApp.posts.forms import PostCreateForm, PostDeleteForm, SearchForm, PostEditForm, CommentFormSet
+from forumApp.decorators import measure_execution_time
+from forumApp.posts.forms import PostCreateForm, PostDeleteForm, SearchForm, CommentFormSet
+from forumApp.posts.mixins import TimeRestrictedMixin
 from forumApp.posts.models import Post
 
 
@@ -35,14 +34,6 @@ class IndexView(TemplateView):
             return ['common/index_logged_in.html']              # dynamic way for template
         else:
             return ['common/index.html']
-
-
-class Index(View):
-    def get(self, request, *args, **kwargs):
-        context = {
-            'dynamic_time': datetime.now(),
-        }
-        return render(request, 'common/index.html', context)
 
 
 # def index(request):
