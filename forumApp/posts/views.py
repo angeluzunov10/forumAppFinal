@@ -4,17 +4,19 @@ from django.core.paginator import Paginator
 from django.forms import modelform_factory
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import TemplateView, RedirectView, ListView, FormView, CreateView, DeleteView, UpdateView, \
     DetailView
 
+from decorators import measure_execution_time
 from forumApp.posts.forms import PostCreateForm, PostDeleteForm, SearchForm, PostEditForm, CommentFormSet
 from forumApp.posts.models import Post
 
 
 # Create your views here.
 
-
+@method_decorator(measure_execution_time, name='dispatch')
 class IndexView(TemplateView):
     template_name = 'common/index.html'  # static way
     extra_context = {
@@ -56,7 +58,7 @@ class DashboardView(ListView, FormView):
     template_name = 'posts/dashboard.html'
     context_object_name = 'posts'
     form_class = SearchForm
-    paginate_by = 3
+    paginate_by = 6
     success_url = reverse_lazy('dash')
 
     model = Post
