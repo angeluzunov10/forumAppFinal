@@ -9,7 +9,6 @@ from django.views.generic import TemplateView, RedirectView, ListView, FormView,
 
 from forumApp.decorators import measure_execution_time
 from forumApp.posts.forms import PostCreateForm, PostDeleteForm, SearchForm, CommentFormSet
-from forumApp.posts.mixins import TimeRestrictedMixin
 from forumApp.posts.models import Post
 
 
