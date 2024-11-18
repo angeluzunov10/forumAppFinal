@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap4",
     "forumApp.accounts.apps.AccountsConfig",
+    "forumApp.common.apps.CommonConfig"
 ]
 
 MIDDLEWARE = [
