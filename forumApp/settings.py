@@ -54,7 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'forumApp.middlewares.get_execution_time',
+    # 'forumApp.middlewares.get_execution_time',
+    'forumApp.middlewares.MeasureTimeExecution',
 ]
 
 ROOT_URLCONF = 'forumApp.urls'
